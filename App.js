@@ -1,26 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View, Button } from 'react-native';
+import {styles} from './style'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Hello world! My name is</Text>
-      <Text style={styles.text}>João Pedro!</Text> 
-      <StatusBar style="auto" />
+      <View>
+        <Text style={styles.textParagraph}>Hello world! My name is</Text>
+      </View>
+      <Text style={styles.text}>João Pedro!</Text>
+      <Button title='Tap me!'
+      color='blue'
+      />
+      <StatusBar style="light" />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 20,
-  },
-});
