@@ -1,38 +1,57 @@
-import { useState } from 'react';
-import { Text, View, Button, TextInput, StyleSheet, ScrollView } from 'react-native';
+import { useState } from 'react'; //Importing useState component from react.
+import { 
+  Text,
+  View, 
+  Button, 
+  TextInput, 
+  StyleSheet, 
+  ScrollView, 
+  FlatList 
+} from 'react-native'; //Importing useful components from react-native.
 
-export default function App() {
-  const [enteredGoalText, setEnteredGoalText] = useState('');
-  const [courseGoals, setCourseGoals] = useState ([]);
+export default function App() { //The default export is the function 'App'
+  const [enteredGoalText, setEnteredGoalText] = useState(''); //Creating a const variable(string) for the entered text.
+  const [courseGoals, setCourseGoals] = useState ([]); //Creating a const variable(array) for the course goals.
 
-  function goalInputHandler(enteredText){
-    setEnteredGoalText(enteredText)
+  function goalInputHandler(enteredText){ //Creating 'GoalInputHandler' function that catches the enteredText as parameter.
+    setEnteredGoalText(enteredText) //'setEnteredGoalText' is a function that update the 'enteredGoalText' state with the 'enteredText' value.
   };
 
-  function addGoalHandler(){
-    setCourseGoals((currentCourseGoals) => [...currentCourseGoals, enteredGoalText,]);
+  function addGoalHandler(){ //Creating 'addGoalHandler' function to add a 'goal' into our 'CourseGoals'.
+    setCourseGoals(//'setCourseGoals' is a function that update the 'currentCourseGoals' state. 
+      (currentCourseGoals) => //We are using a callback function as parameter '(currentCourseGoals) => [...]', where receives the current state then return a new state.
+      [...currentCourseGoals, enteredGoalText,] //The callback function receives the current state as argument 'currentCourseGoals', then return that contains all elements from array with the new goal 'enteredGoalText'.
+      //Spread operator before the array '...' is used to spread the elements in the new array. Creating a new array with all elements from 'currrentCourseGoals' then adding the new 'enteredGoalText' at the end.
+      /* Without Spread operator:
+      (pets) => [pets, new_pet] == [[cat, cow, sheep], dog]
+      
+      Using Spread operator:
+      (pets) => [...pets, new_pet] == [cat, cow, sheep, dog] */
+    );
   }; 
 
-  return (
+  return ( //Return defines what will be rendered in the app.
     <View style={styles.appContainer}>
       <View style={styles.inputContainer}>
-
         <TextInput 
         placeholder='Your Course goal!' 
         style={styles.textInput}
-        onChangeText={goalInputHandler}/>
-
+        onChangeText={goalInputHandler}
+        />
         <Button title='Add Goal' onPress={addGoalHandler}/>
       </View>
 
       <View style={styles.goalsContainer}>
-        <ScrollView>
-          {courseGoals.map ((goal) => (
-            <View key={goal} style={styles.goalItem}>
+        <FlatList 
+        alwaysBounceVertical={false}
+        data={courseGoals} 
+        renderItem={
+            <View style={styles.goalItem}>
               <Text style={styles.goalText}>{goal}</Text>
-            </View>
-          ))}
-        </ScrollView>
+            </View>}
+        keyExtractor={goal}
+        >
+        </FlatList>
       </View>
 
     </View>
