@@ -8,6 +8,7 @@ import {
   ScrollView, 
   FlatList 
 } from 'react-native'; //Importing useful components from react-native.
+import GoalItem from './components/GoalItem';
 
 export default function App() { //The default export is the function 'App'
   const [enteredGoalText, setEnteredGoalText] = useState(''); //Creating a const variable(string) for the entered text.
@@ -46,11 +47,7 @@ export default function App() { //The default export is the function 'App'
         <FlatList
         data={courseGoals} //Required prop, data receive the array of items you want to pass into the FlatList.
         renderItem={(itemData) => { //Required prop, this told the FlatList how to render each item in the list, for exemple, this code using components.
-          return (
-            <View style={styles.goalItem}>
-              <Text style={styles.goalText}>{itemData.item.text}</Text> {/*Each item has an index, from that index you can add conditions, in this code you access the propertie 'text' of an object 'item' inside a 'itemData'*/}
-            </View>
-          );
+          return <GoalItem />;
         }}
         keyExtractor={(item, index) => { //Required prop, function that returns a unique key for each item in list. The 'item' means the current item in list being processed. 'index' not used in this exemple.
           return item.id; //returns the propertie`s value of the current item.
@@ -87,14 +84,5 @@ const styles = StyleSheet.create({
   },
   goalsContainer:{
     flex: 4,
-  },
-  goalItem:{
-    margin: 8,
-    padding: 8,
-    borderRadius: 12,
-    backgroundColor: '#5e0acc',
-  },
-  goalText:{
-    color: '#fff',
   },
 });
