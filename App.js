@@ -37,23 +37,23 @@ export default function App() { //The default export is the function 'App'
         <TextInput 
         placeholder='Your Course goal!' 
         style={styles.textInput}
-        onChangeText={goalInputHandler}
+        onChangeText={goalInputHandler} //Event on change text entered
         />
         <Button title='Add Goal' onPress={addGoalHandler}/>
       </View>
 
       <View style={styles.goalsContainer}>
-        <FlatList 
-        data={courseGoals} //Required prop
-        renderItem={(itemData) => { //Required prop
+        <FlatList
+        data={courseGoals} //Required prop, data receive the array of items you want to pass into the FlatList.
+        renderItem={(itemData) => { //Required prop, this told the FlatList how to render each item in the list, for exemple, this code using components.
           return (
             <View style={styles.goalItem}>
-              <Text style={styles.goalText}>{itemData.item.text}</Text>
+              <Text style={styles.goalText}>{itemData.item.text}</Text> {/*Each item has an index, from that index you can add conditions, in this code you access the propertie 'text' of an object 'item' inside a 'itemData'*/}
             </View>
           );
         }}
-        keyExtractor={(item, index) => { //Required prop
-          return item.id;
+        keyExtractor={(item, index) => { //Required prop, function that returns a unique key for each item in list. The 'item' means the current item in list being processed. 'index' not used in this exemple.
+          return item.id; //returns the propertie`s value of the current item.
         }}
         alwaysBounceVertical={false}
         />
