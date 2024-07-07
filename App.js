@@ -47,7 +47,7 @@ export default function App() { //The default export is the function 'App'
         <FlatList
         data={courseGoals} //Required prop, data receive the array of items you want to pass into the FlatList.
         renderItem={(itemData) => { //Required prop, this told the FlatList how to render each item in the list, for exemple, this code using components.
-          return <GoalItem />;
+          return <GoalItem text={itemData.item.text} />;
         }}
         keyExtractor={(item, index) => { //Required prop, function that returns a unique key for each item in list. The 'item' means the current item in list being processed. 'index' not used in this exemple.
           return item.id; //returns the propertie`s value of the current item.
