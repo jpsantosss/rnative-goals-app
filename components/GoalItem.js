@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Pressable } from 'react-native'
+import { StyleSheet, View, Text, Pressable, Image } from 'react-native'
 
 function GoalItem(props) {
     return (
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     goalItem:{
         margin: 8,
         borderRadius: 12,
-        backgroundColor: '#5e0acc',
+        backgroundColor: '#804ECC',
     },
     pressedItem:{
         opacity: 0.5,
