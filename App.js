@@ -2,13 +2,19 @@ import { useState } from 'react'; //Importing useState component from react.
 import { 
   View, 
   StyleSheet, 
-  FlatList 
+  FlatList,
+  Button,
 } from 'react-native'; //Importing useful components from react-native.
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
 
 export default function App() { //The default export is the function 'App'
+  const [modalIsVisible, setModalIsVisible] = useState(false);
   const [courseGoals, setCourseGoals] = useState ([]); //Creating a const variable(array) for the course goals.
+
+  function startAddGoalHandler(){
+    setModalIsVisible(true);
+  }
 
   function addGoalHandler(enteredGoalText){ //Creating 'addGoalHandler' function to add a 'goal' into our 'CourseGoals'.
     setCourseGoals(//'setCourseGoals' is a function that update the 'currentCourseGoals' state. 
@@ -32,7 +38,12 @@ export default function App() { //The default export is the function 'App'
 
   return ( //Return defines what will be rendered in the app.
     <View style={styles.appContainer}>
-      <GoalInput onAddGoal={addGoalHandler} />
+      <Button 
+        title='Add new Goal' 
+        color="#5e0acc"
+        onPress={startAddGoalHandler}  
+      />
+      <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} />
 
       <View style={styles.goalsContainer}>
         <FlatList
