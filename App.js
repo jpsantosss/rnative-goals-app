@@ -5,6 +5,8 @@ import {
   FlatList,
   Button,
 } from 'react-native'; //Importing useful components from react-native.
+import { StatusBar } from 'expo-status-bar';
+
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
 
@@ -41,38 +43,39 @@ export default function App() { //The default export is the function 'App'
   }
 
   return ( //Return defines what will be rendered in the app.
-    <View style={styles.appContainer}>
-      <Button 
-        title='Add new Goal' 
-        color="#5e0acc"
-        onPress={startAddGoalHandler}  
-      />
-      <GoalInput 
-        visible={modalIsVisible} 
-        onAddGoal={addGoalHandler} 
-        onCancel={endAddGoalHandler}
-      />
-
-      <View style={styles.goalsContainer}>
-        <FlatList
-        data={courseGoals} //Required prop, data receive the array of items you want to pass into the FlatList.
-        renderItem={(itemData) => { //Required prop, this told the FlatList how to render each item in the list, for exemple, this code using components.
-          return (
-          <GoalItem 
-            text={itemData.item.text}
-            id={itemData.item.id}
-            onDeleteItem={deleteGoalHandler}
-            />
-          );
-        }}
-        keyExtractor={(item, index) => { //Required prop, function that returns a unique key for each item in list. The 'item' means the current item in list being processed. 'index' not used in this exemple.
-          return item.id; //returns the propertie`s value of the current item.
-        }}
-        alwaysBounceVertical={false}
+    <>
+      <StatusBar style='light'/>
+      <View style={styles.appContainer}>
+        <Button 
+          title='Add new Goal' 
+          color="#8A18F0"
+          onPress={startAddGoalHandler}  
         />
+        <GoalInput 
+          visible={modalIsVisible} 
+          onAddGoal={addGoalHandler} 
+          onCancel={endAddGoalHandler}
+        />
+        <View style={styles.goalsContainer}>
+          <FlatList
+          data={courseGoals} //Required prop, data receive the array of items you want to pass into the FlatList.
+          renderItem={(itemData) => { //Required prop, this told the FlatList how to render each item in the list, for exemple, this code using components.
+            return (
+            <GoalItem 
+              text={itemData.item.text}
+              id={itemData.item.id}
+              onDeleteItem={deleteGoalHandler}
+              />
+            );
+          }}
+          keyExtractor={(item, index) => { //Required prop, function that returns a unique key for each item in list. The 'item' means the current item in list being processed. 'index' not used in this exemple.
+            return item.id; //returns the propertie`s value of the current item.
+          }}
+          alwaysBounceVertical={false}
+          />
+        </View>
       </View>
-
-    </View>
+    </>
   );
 }
 
@@ -81,6 +84,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 70,
     paddingHorizontal: 16,
+    backgroundColor: '#AFA7FF',
   },
   goalsContainer:{
     flex: 4,
