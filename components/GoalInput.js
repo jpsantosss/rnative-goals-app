@@ -2,14 +2,14 @@ import { StyleSheet, View, TextInput, Button , Modal, Image } from 'react-native
 import { useState } from 'react';
 
 function GoalInput(props){
-    const [enteredGoalText, setEnteredGoalText] = useState(''); //Creating a const variable(string) for the entered text.
+    const [enteredGoalText, setEnteredGoalText] = useState('');
     const [modalIsVisible, setModalIsVisible] = useState(false);
-    function goalInputHandler(enteredText){ //Creating 'GoalInputHandler' function that catches the enteredText as parameter.
-        setEnteredGoalText(enteredText) //'setEnteredGoalText' is a function that update the 'enteredGoalText' state with the 'enteredText' value.
+    function goalInputHandler(enteredText){
+        setEnteredGoalText(enteredText)
     };
     function addGoalHandler(){
         props.onAddGoal(enteredGoalText);
-        setEnteredGoalText('');//Reset our input to an empty string
+        setEnteredGoalText('');
     }
     function cancelAddGoalHandler(){
         setModalIsVisible(false)
@@ -21,8 +21,8 @@ function GoalInput(props){
                 <TextInput 
                     placeholder='Your Course goal!' 
                     style={styles.textInput}
-                    onChangeText={goalInputHandler} //Event on change text entered
-                    value={enteredGoalText} //Reset our input to an empty string visually
+                    onChangeText={goalInputHandler}
+                    value={enteredGoalText}
                 />
                 <View style={styles.buttonContainer}>
                     <View style={styles.button}>
